@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks.ts'
 import CartSummary from '../components/CartSummary.tsx'
@@ -10,6 +10,9 @@ export default function OrderPage() {
   const items = useAppSelector(selectCartItems)
   const { status, orderId } = useAppSelector((state) => state.order)
   const [form, setForm] = useState({ fullName: '', address: '', email: '' })
+
+  // Leaving the page clears the last result, so the next visit starts a fresh order
+  useEffect(() => () => void dispatch(resetOrder()), [dispatch])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -25,9 +28,7 @@ export default function OrderPage() {
       <>
         <h1>ההזמנה התקבלה</h1>
         <p>מספר הזמנה: {orderId}</p>
-        <Link to="/" onClick={() => dispatch(resetOrder())}>
-          להזמנה חדשה
-        </Link>
+        <Link to="/">להזמנה חדשה</Link>
       </>
     )
   }
