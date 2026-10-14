@@ -35,7 +35,13 @@ Server=localhost\SQLEXPRESS;Database=Catalog;Trusted_Connection=True;TrustServer
 
 ## הרצה
 
-כל רכיב בטרמינל משלו:
+הדרך המהירה: הסקריפט מתקין את החבילות אם צריך, מפעיל את שלושת הרכיבים, כל אחד בחלון משלו, ופותח את הדפדפן כשהקטלוג מוכן:
+
+```
+powershell -ExecutionPolicy Bypass -File start.ps1
+```
+
+או ידנית, כל רכיב בטרמינל משלו:
 
 ```
 cd catalog-api
